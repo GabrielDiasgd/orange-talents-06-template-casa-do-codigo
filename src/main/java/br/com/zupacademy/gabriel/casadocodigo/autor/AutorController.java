@@ -5,6 +5,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +19,19 @@ public class AutorController {
 	@Autowired
 	private AutorRepository autorRepository;
 	
+	@Autowired
+	private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
+	
+	@InitBinder
+	public void init (WebDataBinder binder) {
+		binder.addValidators(proibeEmailDuplicadoAutorValidator);
+	}
+	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<AutorResponse> criarAutor (@RequestBody  @Valid AutorRequest autorRequest) {
 		Autor autor = autorRequest.toModel();
+		autor.verificaEmailDuplicado(autorRepository);
 		autorRepository.save(autor);
 	
 		return ResponseEntity.ok(new AutorResponse(autor));

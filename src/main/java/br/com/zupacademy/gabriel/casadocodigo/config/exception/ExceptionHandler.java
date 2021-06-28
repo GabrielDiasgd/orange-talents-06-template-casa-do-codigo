@@ -34,8 +34,7 @@ public class ExceptionHandler {
 		});
 		
 		return errorsResponse;
-		
-		
-		
 	}
+	
 }
+
