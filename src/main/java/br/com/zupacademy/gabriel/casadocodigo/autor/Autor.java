@@ -1,7 +1,6 @@
 package br.com.zupacademy.gabriel.casadocodigo.autor;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,12 +57,5 @@ public class Autor {
 
 	public String getDescricao() {
 		return descricao;
-	}
-	
-	public void verificaEmailDuplicado(AutorRepository autorRepository) {
-		Optional<Autor> autor  = autorRepository.findByEmail(this.email);
-		if (autor.isPresent()) {
-			throw new IllegalArgumentException();
-		}
 	}
 }

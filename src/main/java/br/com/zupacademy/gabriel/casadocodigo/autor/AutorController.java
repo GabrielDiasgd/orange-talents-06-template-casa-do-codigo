@@ -31,9 +31,7 @@ public class AutorController {
 	@Transactional
 	public ResponseEntity<AutorResponse> criarAutor (@RequestBody  @Valid AutorRequest autorRequest) {
 		Autor autor = autorRequest.toModel();
-		autor.verificaEmailDuplicado(autorRepository);
 		autorRepository.save(autor);
-	
 		return ResponseEntity.ok(new AutorResponse(autor));
 	}
 
