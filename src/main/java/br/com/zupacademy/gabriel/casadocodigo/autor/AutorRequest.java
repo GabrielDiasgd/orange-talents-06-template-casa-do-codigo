@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.zupacademy.gabriel.casadocodigo.config.validation.UniqueValue;
+
 public class AutorRequest {
 
 	@NotBlank
@@ -12,6 +14,7 @@ public class AutorRequest {
 	
 	@NotBlank
 	@Email
+	@UniqueValue(domainClass = Autor.class, fieldName = "email")
 	private String email;
 	
 	@NotBlank
