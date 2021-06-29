@@ -33,6 +33,7 @@ public class Autor {
 	@CreationTimestamp
 	private LocalDateTime dataCriacao;
 	
+	@Deprecated
 	public Autor() {
 
 	}

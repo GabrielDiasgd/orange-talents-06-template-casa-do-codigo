@@ -48,7 +48,11 @@ public class Livro {
 	@ManyToOne
 	@NotNull
 	private Autor autor;
-	
+
+	@Deprecated
+	public Livro() {
+	}
+
 	public Livro(@NotBlank String titulo, @NotBlank @Length(max = 500) String resumo, @NotBlank String sumario,
 			@NotNull BigDecimal preco, @NotNull Integer numeroPaginas, @NotBlank String isbn,
 			@Future LocalDate dataPublicacao, @NotNull Categoria categoria, @NotNull Autor autor) {
@@ -103,10 +107,5 @@ public class Livro {
 	public Autor getAutor() {
 		return autor;
 	}
-	
-	
 
-	
-	
-	
 }

@@ -16,6 +16,7 @@ public class Categoria {
 	@NotBlank
 	private String nome;
 
+	@Deprecated
 	public Categoria() {
 	}
 
