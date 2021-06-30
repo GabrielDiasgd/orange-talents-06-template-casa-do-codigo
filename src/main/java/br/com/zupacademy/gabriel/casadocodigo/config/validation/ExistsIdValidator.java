@@ -29,7 +29,6 @@ public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 		Query query = manager.createQuery("select 1 from " + klass.getName() + " where " + domainAttribute + "=:value");
-		System.out.println(value);
 		query.setParameter("value", value);
 		List<?> list = query.getResultList();
 		Assert.state(list.size() <= 1 , "Não existe um " + klass.getSimpleName() + " com o id " + value);
