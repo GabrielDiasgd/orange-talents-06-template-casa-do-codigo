@@ -5,15 +5,15 @@ import java.util.Optional;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.zupacademy.gabriel.casadocodigo.config.validation.ExisteNomeEstadoEmPais;
 import br.com.zupacademy.gabriel.casadocodigo.config.validation.ExistsId;
-import br.com.zupacademy.gabriel.casadocodigo.config.validation.UniqueValue;
 import br.com.zupacademy.gabriel.casadocodigo.pais.Pais;
 import br.com.zupacademy.gabriel.casadocodigo.pais.PaisRepository;
 
+@ExisteNomeEstadoEmPais
 public class EstadoRequest {
 	
 	@NotBlank
-	@UniqueValue(domainClass = Estado.class, fieldName = "nome")
 	private String nome;
 	@NotNull
 	@ExistsId(domainClass = Pais.class, fieldName = "id")
@@ -25,6 +25,18 @@ public class EstadoRequest {
 		this.nome = nome;
 		this.idPais = idPais;
 	}
+	
+	
+	public String getNome() {
+		return nome;
+	}
+
+
+	public Long getIdPais() {
+		return idPais;
+	}
+
+
 	public Estado toModel(PaisRepository paisRepository) {
 		@NotNull Optional<Pais> pais = paisRepository.findById(this.idPais);
 		if (pais.isEmpty()) {
